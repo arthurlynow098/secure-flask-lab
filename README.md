@@ -1,27 +1,29 @@
-<a id="top"></a>
+<p align="center"><sub>Secure Flask Lab</sub></p>
 
-<p align="center"><img src="assets/banner.svg" alt="Secure Flask Lab" width="100%"></p>
+---
 
 <p align="center">
-<img alt="Python" src="https://img.shields.io/badge/Python-3.10+-EF4444?style=for-the-badge&logo=python&logoColor=white">
-<img alt="Flask" src="https://img.shields.io/badge/Flask-3-242424?style=for-the-badge&logo=flask&logoColor=white">
-<img alt="OWASP Top 10" src="https://img.shields.io/badge/OWASP-Top%2010-242424?style=for-the-badge">
-<a href="https://github.com/arthurlynow098/secure-flask-lab/actions/workflows/testes.yml"><img alt="Testes" src="https://img.shields.io/github/actions/workflow/status/arthurlynow098/secure-flask-lab/testes.yml?style=for-the-badge&label=testes&color=242424"></a>
+  <img src="assets/banner.png" alt="Secure Flask Lab" width="100%">
 </p>
 
-<p align="center"><a href="#sobre">Sobre</a> &nbsp;&nbsp; <a href="#como-funciona">Defesas</a> &nbsp;&nbsp; <a href="#rodando">Rodando</a> &nbsp;&nbsp; <a href="#aprendi">O que aprendi</a> &nbsp;&nbsp; <a href="#estudos">Estudos</a></p>
+<p align="center">
+  App Flask com defesas contra SQLi, XSS, IDOR e CSRF, cada uma provada por teste
+</p>
 
-<a id="sobre"></a>
+<p align="center">
+  <img alt="Python" src="https://img.shields.io/badge/Python-3.10+-EF4444?style=for-the-badge&logo=python&logoColor=white">
+  <img alt="Flask" src="https://img.shields.io/badge/Flask-3-242424?style=for-the-badge&logo=flask&logoColor=white">
+  <img alt="OWASP Top 10" src="https://img.shields.io/badge/OWASP-Top%2010-242424?style=for-the-badge">
+  <a href="https://github.com/arthurlynow098/secure-flask-lab/actions/workflows/testes.yml"><img alt="Testes" src="https://img.shields.io/github/actions/workflow/status/arthurlynow098/secure-flask-lab/testes.yml?style=for-the-badge&label=testes&color=242424"></a>
+</p>
 
-<p><img src="assets/secao-01.svg" alt="Sobre o projeto" width="100%"></p>
+## Sobre o projeto
 
 Eu venho do desenvolvimento back-end, e a maior parte das vulnerabilidades web que estudei nasce de um descuido pequeno de quem escreveu o código. Uma consulta montada com concatenação de texto, um `|safe` esquecido no template, uma rota que confere se o usuário está logado mas não confere se a nota é dele.
 
 O Secure Flask Lab é um app de anotações simples, com cadastro, login e busca, escrito com cada defesa no lugar certo. Todas estão marcadas no código com o comentário `DEFESA`, e **cada uma tem um teste automatizado que prova que ela funciona**. A ideia é ter um projeto que eu consiga abrir numa entrevista e explicar linha por linha.
 
-<a id="como-funciona"></a>
-
-<p><img src="assets/secao-02.svg" alt="Como funciona" width="100%"></p>
+## Como funciona
 
 | Risco (OWASP Top 10) | Defesa no código | Teste que prova |
 |---|---|---|
@@ -33,21 +35,16 @@ O Secure Flask Lab é um app de anotações simples, com cadastro, login e busca
 | **A07 Authentication Failures** | Mesma mensagem para usuário inexistente e senha errada, sessão renovada no login | `test_login_errado_tem_mensagem_generica` |
 | **A05 Security Misconfiguration** | CSP, `nosniff`, `Referrer-Policy`, `Permissions-Policy` e cookie `HttpOnly` com `SameSite` | `test_cabecalhos_de_seguranca` e `test_cookie_de_sessao_httponly` |
 
-Um trecho que resume a ideia, a rota que mostra uma nota
+## Tecnologias
 
-```python
-# DEFESA o dono entra no WHERE, então trocar o número na URL não mostra nota alheia (IDOR)
-nota = db().execute("SELECT * FROM notas WHERE id = ? AND dono_id = ?",
-                    (nota_id, session["user_id"])).fetchone()
-if nota is None:
-    abort(404)
-```
+<p>
+  <img alt="Python" src="https://img.shields.io/badge/Python-3776AB?style=flat-square&amp;logo=python&amp;logoColor=white">
+  <img alt="Flask" src="https://img.shields.io/badge/Flask-000000?style=flat-square&amp;logo=flask&amp;logoColor=white">
+  <img alt="OWASP Top 10" src="https://img.shields.io/badge/OWASP_Top_10-000000?style=flat-square&amp;logo=owasp&amp;logoColor=white">
+  <img alt="pytest" src="https://img.shields.io/badge/pytest-0A9EDC?style=flat-square&amp;logo=pytest&amp;logoColor=white">
+</p>
 
-**Um bug que os testes pegaram.** Na primeira versão, o login limpava a sessão (o que é certo) e com isso o token CSRF sumia. Aí um POST sem token comparava texto vazio com texto vazio e passava. O teste `test_post_sem_csrf_e_recusado` falhou, eu entendi o motivo e corrigi exigindo que o token esperado exista. Foi a melhor demonstração de por que vale escrever teste para segurança.
-
-<a id="rodando"></a>
-
-<p><img src="assets/secao-03.svg" alt="Rodando na sua máquina" width="100%"></p>
+## Executando o código
 
 ```bash
 git clone https://github.com/arthurlynow098/secure-flask-lab.git
@@ -67,7 +64,7 @@ pip install -r requirements-dev.txt
 python -m pytest -q
 ```
 
-<p><img src="assets/secao-04.svg" alt="Exemplo de saída" width="100%"></p>
+## Exemplo
 
 ```text
 $ python -m pytest -v
@@ -86,25 +83,7 @@ tests/test_defesas.py::test_cookie_de_sessao_httponly PASSED
 10 passed
 ```
 
-<a id="aprendi"></a>
-
-<p><img src="assets/secao-05.svg" alt="O que eu aprendi" width="100%"></p>
-
-- Consulta parametrizada resolve injeção de SQL de vez, não precisa "limpar" a entrada na mão
-- Autenticação (quem é você) e autorização (o que você pode ver) são verificações diferentes, e IDOR acontece quando só a primeira existe
-- Como funciona um token CSRF e por que o `SameSite` ajuda mas não substitui ele
-- Escrever teste que prova a defesa, e não só que a tela abre
-- Pequenos detalhes de login que evitam enumeração de usuário e fixação de sessão
-
-Próximos passos
-
-- [ ] Limite de tentativas de login por IP
-- [ ] Trocar o SQL na mão por SQLAlchemy e comparar
-- [ ] Rodar o OWASP ZAP contra o app e documentar o resultado
-
-<a id="estudos"></a>
-
-<p><img src="assets/secao-06.svg" alt="Estudei por aqui" width="100%"></p>
+## Estudei por aqui
 
 Segui essas aulas e materiais para entender e aplicar tudo que está aqui.
 
@@ -117,6 +96,8 @@ Segui essas aulas e materiais para entender e aplicar tudo que está aqui.
 | [OWASP SQL Injection Prevention Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html) | Consultas parametrizadas como defesa principal |
 | [Tutorial oficial do Flask](https://flask.palletsprojects.com/en/stable/tutorial/) | Estrutura do app, factory e banco SQLite |
 
-<p align="center"><sub>Parte do <a href="https://github.com/arthurlynow098">Lince Lab</a>, minha coleção de projetos de cibersegurança</sub></p>
+## Licença
 
-<p align="center"><a href="#top">Voltar ao topo</a></p>
+Distribuído sob a licença MIT. Veja o arquivo [LICENSE](LICENSE).
+
+<p align="center"><sub>A gravura do banner é a mamangava de Wenceslaus Hollar, de 1646, em domínio público no <a href="https://commons.wikimedia.org/wiki/File%3AWenceslas_Hollar_-_Dragonflies_and_a_bumble_bee_%28State_1%29.jpg">Wikimedia Commons</a>.</sub></p>
