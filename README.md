@@ -1,6 +1,6 @@
 <a id="top"></a>
 
-<p align="center"><img src="assets/banner.png" alt="Secure Flask Lab" width="100%"></p>
+<p align="center"><img src="assets/banner.svg" alt="Secure Flask Lab" width="100%"></p>
 
 <p align="center">
 <img alt="Python" src="https://img.shields.io/badge/Python-3.10+-EF4444?style=for-the-badge&logo=python&logoColor=white">
@@ -13,7 +13,7 @@
 
 <a id="sobre"></a>
 
-<p><img src="assets/secao-01.png" alt="Sobre o projeto" width="100%"></p>
+<p><img src="assets/secao-01.svg" alt="Sobre o projeto" width="100%"></p>
 
 Eu venho do desenvolvimento back-end, e a maior parte das vulnerabilidades web que estudei nasce de um descuido pequeno de quem escreveu o código. Uma consulta montada com concatenação de texto, um `|safe` esquecido no template, uma rota que confere se o usuário está logado mas não confere se a nota é dele.
 
@@ -21,7 +21,7 @@ O Secure Flask Lab é um app de anotações simples, com cadastro, login e busca
 
 <a id="como-funciona"></a>
 
-<p><img src="assets/secao-02.png" alt="Como funciona" width="100%"></p>
+<p><img src="assets/secao-02.svg" alt="Como funciona" width="100%"></p>
 
 | Risco (OWASP Top 10) | Defesa no código | Teste que prova |
 |---|---|---|
@@ -47,7 +47,7 @@ if nota is None:
 
 <a id="rodando"></a>
 
-<p><img src="assets/secao-03.png" alt="Rodando na sua máquina" width="100%"></p>
+<p><img src="assets/secao-03.svg" alt="Rodando na sua máquina" width="100%"></p>
 
 ```bash
 git clone https://github.com/arthurlynow098/secure-flask-lab.git
@@ -67,7 +67,7 @@ pip install -r requirements-dev.txt
 python -m pytest -q
 ```
 
-<p><img src="assets/secao-04.png" alt="Exemplo de saída" width="100%"></p>
+<p><img src="assets/secao-04.svg" alt="Exemplo de saída" width="100%"></p>
 
 ```text
 $ python -m pytest -v
@@ -88,7 +88,7 @@ tests/test_defesas.py::test_cookie_de_sessao_httponly PASSED
 
 <a id="aprendi"></a>
 
-<p><img src="assets/secao-05.png" alt="O que eu aprendi" width="100%"></p>
+<p><img src="assets/secao-05.svg" alt="O que eu aprendi" width="100%"></p>
 
 - Consulta parametrizada resolve injeção de SQL de vez, não precisa "limpar" a entrada na mão
 - Autenticação (quem é você) e autorização (o que você pode ver) são verificações diferentes, e IDOR acontece quando só a primeira existe
@@ -104,7 +104,7 @@ Próximos passos
 
 <a id="estudos"></a>
 
-<p><img src="assets/secao-06.png" alt="Estudei por aqui" width="100%"></p>
+<p><img src="assets/secao-06.svg" alt="Estudei por aqui" width="100%"></p>
 
 Segui essas aulas e materiais para entender e aplicar tudo que está aqui.
 
