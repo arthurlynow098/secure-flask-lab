@@ -1,0 +1,16 @@
+:root { --fundo: #0b0b0b; --papel: #161616; --texto: #f5f1e6; --mudo: #8a867c; --cor: #ef4444; }
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--fundo); color: var(--texto); font: 16px/1.5 system-ui, sans-serif; }
+header { display: flex; justify-content: space-between; align-items: center; padding: 16px 24px; border-bottom: 1px solid #222; }
+header strong span { color: var(--cor); }
+header form { display: flex; gap: 8px; align-items: center; }
+main { max-width: 720px; margin: 0 auto; padding: 24px 16px; }
+a { color: var(--cor); }
+.cartao { background: var(--papel); border-radius: 12px; padding: 20px; display: grid; gap: 12px; margin: 16px 0; }
+label { display: grid; gap: 4px; color: var(--mudo); font-size: 14px; }
+input, textarea { background: var(--fundo); color: var(--texto); border: 1px solid #333; border-radius: 8px; padding: 10px; font: inherit; }
+button { background: var(--cor); color: #fff; border: 0; border-radius: 8px; padding: 10px 16px; font-weight: 700; cursor: pointer; }
+.busca { display: flex; gap: 8px; } .busca input { flex: 1; }
+.notas { padding-left: 18px; } .mudo { color: var(--mudo); }
+.aviso { background: #3a1414; border-left: 4px solid var(--cor); padding: 8px 12px; border-radius: 6px; }
+pre { white-space: pre-wrap; font: inherit; }

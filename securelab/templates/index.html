@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block conteudo %}
+<h1>Minhas notas</h1>
+<form method="get" class="busca">
+  <input name="busca" value="{{ busca }}" placeholder="buscar pelo título">
+  <button>buscar</button>
+</form>
+{% if busca %}<p class="mudo">resultados para {{ busca }}</p>{% endif %}
+<ul class="notas">
+  {% for n in notas %}
+    <li><a href="{{ url_for('show_note', nota_id=n.id) }}">{{ n.titulo }}</a></li>
+  {% else %}
+    <li class="mudo">nenhuma nota</li>
+  {% endfor %}
+</ul>
+<form method="post" action="{{ url_for('create_note') }}" class="cartao">
+  <input type="hidden" name="csrf" value="{{ csrf_token() }}">
+  <label>título <input name="titulo" maxlength="120" required></label>
+  <label>texto <textarea name="texto" rows="4"></textarea></label>
+  <button>salvar nota</button>
+</form>
+{% endblock %}

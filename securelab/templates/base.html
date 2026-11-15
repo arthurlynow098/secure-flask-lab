@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Secure Flask Lab</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <header>
+    <strong>secure<span>flask</span>lab</strong>
+    {% if session.nome %}
+      <form method="post" action="{{ url_for('logout') }}">
+        <input type="hidden" name="csrf" value="{{ csrf_token() }}">
+        <span>{{ session.nome }}</span> <button>sair</button>
+      </form>
+    {% endif %}
+  </header>
+  <main>
+    {% for msg in get_flashed_messages() %}<p class="aviso">{{ msg }}</p>{% endfor %}
+    {% block conteudo %}{% endblock %}
+  </main>
+</body>
+</html>

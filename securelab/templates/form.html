@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block conteudo %}
+<h1>{{ titulo }}</h1>
+<form method="post" action="{{ acao }}" class="cartao">
+  <input type="hidden" name="csrf" value="{{ csrf_token() }}">
+  <label>nome <input name="nome" required autocomplete="username"></label>
+  <label>senha <input name="senha" type="password" required autocomplete="current-password"></label>
+  <button>{{ titulo }}</button>
+</form>
+<p class="mudo">
+  {% if titulo == "Entrar" %}não tem conta? <a href="{{ url_for('register') }}">criar</a>
+  {% else %}já tem conta? <a href="{{ url_for('login') }}">entrar</a>{% endif %}
+</p>
+{% endblock %}
